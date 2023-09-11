@@ -1,0 +1,21 @@
+<div class="calculator">
+<div *ngIf="userNotAllowed" class="noUser">Only Admin Can Use Calculator</div>
+  <div class="calc">
+    <div class="display">
+      <app-display></app-display>
+    </div>
+    <div class="buttons">
+      <div class="functionButtons">
+        <app-function *ngFor="let button of functionButtons" [button]="button" (buttonClick)="handleButtonClick($event)"></app-function>
+      </div>
+      <div class="numberButtons">
+        <app-numeric *ngFor="let button of numberButtons" [button]="button" (buttonClick)="handleButtonClick($event)"></app-numeric>
+      </div>
+      <div class="operationButtons">
+        <app-operation *ngFor="let button of operationButtons" [button]="button" (buttonClick)="handleButtonClick($event)"></app-operation>
+      </div>
+      <div>
+
+  </div>
+ <div class="out"> <app-logout></app-logout></div>
+</div>

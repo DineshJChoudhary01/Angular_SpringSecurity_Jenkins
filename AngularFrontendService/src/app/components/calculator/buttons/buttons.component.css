@@ -1,0 +1,11 @@
+
+
+button {
+    height: 2em;
+    width: 2em;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    background-color: coral;
+    margin-top: 10px;
+  }

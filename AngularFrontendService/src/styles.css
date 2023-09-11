@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+/* import { Component, Input, Output, EventEmitter } from '@angular/core'; */
+
+/* @Component({
+  selector: 'app-button',
+  template: '<button (click)="onButtonClick()">{{ button.sign }}</button>'
+})
+export class ButtonComponent {
+  @Input() button: any;
+  @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
+
+  onButtonClick() {
+    this.buttonClick.emit(this.button);
+  }
+}
+
+
+import { Component } from '@angular/core';
+import { ButtonComponent } from './button.component';
+
+@Component({
+  selector: 'app-function-button',
+  template: '<app-button [button]="button" (buttonClick)="onButtonClick($event)"></app-button>'
+})
+export class FunctionButtonComponent extends ButtonComponent {
+  // Custom logic if needed
+}
+<div class="buttons">
+  <app-function-button *ngFor="let button of functionButtons" [button]="button" (buttonClick)="handleButtonClick($event)"></app-function-button>
+  <app-operation-button *ngFor="let button of operationButtons" [button]="button" (buttonClick)="handleButtonClick($event)"></app-operation-button>
+  <app-number-button *ngFor="let button of numberButtons" [button]="button" (buttonClick)="handleButtonClick($event)"></app-number-button>
+</div>
+import { Component } from '@angular/core';
+import { ButtonModel } from './button.model';
+
+@Component({
+  selector: 'app-calculator',
+  templateUrl: './calculator.component.html',
+  styleUrls: ['./calculator.component.css']
+})
+export class CalculatorComponent {
+  buttonModel = new ButtonModel();
+  functionButtons = this.buttonModel.functionButtons;
+  operationButtons = this.buttonModel.operationButtons;
+  numberButtons = this.buttonModel.numberButtons;
+
+  handleButtonClick(buttonData: any) {
+    // Handle button click logic here
+    console.log('Button clicked:', buttonData);
+    // Perform calculations or other operations based on buttonData
+  }
+} */

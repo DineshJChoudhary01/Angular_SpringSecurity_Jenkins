@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CalculatorUsingAng</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+
+
+<!-- import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-base',
+  template: '<p>Base Component</p>',
+})
+export class BaseComponent implements OnInit {
+  sharedProperty: string;
+
+  constructor() {
+    this.sharedProperty = 'Shared Property from Base';
+  }
+
+  ngOnInit(): void {
+    console.log('Base Component Initialized');
+  }
+
+  sharedMethod(): void {
+    console.log('Shared Method from Base');
+  }
+}
+
+import { Component, OnInit } from '@angular/core';
+import { BaseComponent } from './base.component';
+
+@Component({
+  selector: 'app-child',
+  template: '<p>Child Component</p>',
+})
+export class ChildComponent extends BaseComponent implements OnInit {
+  constructor() {
+    super(); // Call the constructor of the base class
+  }
+
+  ngOnInit(): void {
+    console.log('Child Component Initialized');
+    console.log('Inherited Shared Property:', this.sharedProperty);
+    this.sharedMethod(); // Call the inherited shared method
+  }
+}
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <app-base></app-base>
+    <app-child></app-child>
+  `,
+})
+export class AppComponent {}
+
+import { Component, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-source',
+  template: '<button (click)="sendData()">Send Data</button>'
+})
+export class SourceComponent {
+  @Output() dataSent: EventEmitter<string> = new EventEmitter<string>();
+
+  sendData() {
+    const data = 'Hello, receiving component!';
+    this.dataSent.emit(data);
+  }
+}
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-receiver',
+  template: '<div>{{ receivedData }}</div>'
+})
+export class ReceiverComponent {
+  @Input() receivedData: string;
+}
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    <app-source (dataSent)="receiveData($event)"></app-source>
+    <app-receiver [receivedData]="data"></app-receiver>
+  `
+})
+export class ParentComponent {
+  data: string;
+
+  receiveData(data: string) {
+    this.data = data;
+  }
+} -->
