@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Test Frontend') {
+        stage('Build Frontend') {
             steps {
                 dir('AngularFrontendService') {
                     bat 'npm install'
@@ -34,10 +34,10 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
+        stage('Test Frontend') {
             steps {
                 dir('AngularFrontendService') {
-                    bat 'npm test'
+                    bat 'npm test --single-run'
                 }
             }
         }
