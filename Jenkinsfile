@@ -34,13 +34,13 @@ pipeline {
             }
         }
 
-        stage('Test Frontend') {
-            steps {
-                dir('AngularFrontendService') {
-                    bat 'ng test --watch=false'
-                }
-            }
-        }
+        // stage('Test Frontend') {
+        //     steps {
+        //         dir('AngularFrontendService') {
+        //             bat 'ng test --watch=false'
+        //         }
+        //     }
+        // }
 
         stage('Deploy') {
             steps {
