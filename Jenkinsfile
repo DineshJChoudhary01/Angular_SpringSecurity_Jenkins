@@ -66,7 +66,7 @@ pipeline {
 
         stage('Build Backend') {
             steps {
-                cd('JavaBackendServiceWithSpringSecurity') {
+                dir('JavaBackendServiceWithSpringSecurity') {
                     // Use 'bat' step for Windows-compatible commands
                     bat 'mvn clean install'
                 }
@@ -75,7 +75,7 @@ pipeline {
 
         stage('Build Frontend') {
             steps {
-                cd('AngularFrontendService') {
+                dir('AngularFrontendService') {
                     // Use 'bat' step for Windows-compatible commands
                     bat 'npm install'
                     bat 'npm run ng build'
@@ -85,12 +85,12 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                cd('JavaBackendServiceWithSpringSecurity/target') {
+                dir('JavaBackendServiceWithSpringSecurity/target') {
                     // Use 'bat' step for Windows-compatible commands
                     bat 'xcopy *.war "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\" /Y'
                 }
 
-                // cd('AngularFrontendService/dist') {
+                // dir('AngularFrontendService/dist') {
                 //     // Deploy the frontend (static files) to a web server or CDN
                 //     // For example, you can use 'xcopy' or other Windows commands to copy files
                 //     // sh 'xcopy . user@server:/path/to/destination/' // Update server and paths
