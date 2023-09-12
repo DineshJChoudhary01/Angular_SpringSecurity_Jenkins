@@ -20,7 +20,7 @@ pipeline {
          stage('Test Backend') {
             steps {
                 dir('JavaBackendServiceWithSpringSecurity') {
-                    bat 'test'
+                    bat 'mvn test'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir('AngularFrontendService') {
-                    bat 'npm run ng test'
+                    bat 'npm test'
                 }
             }
         }
