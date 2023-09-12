@@ -37,7 +37,7 @@ pipeline {
         stage('Test Frontend') {
             steps {
                 dir('AngularFrontendService') {
-                    bat 'npm test --single-run'
+                    bat 'npm run ng test --watch=false'
                 }
             }
         }
