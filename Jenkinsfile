@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build Backend') {
             steps {
-                dir('JavaBackendServiceWithSpringSecurity') {
+                dir('JavaBackendServiceWithSpringSecurity/pom.xml') {
                     sh 'mvn clean install'
                 }
             }
