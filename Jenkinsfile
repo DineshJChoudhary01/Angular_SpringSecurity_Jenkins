@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
+        stage('Test Frontend') {
             steps {
                 dir('AngularFrontendService') {
                     bat 'npm install'
