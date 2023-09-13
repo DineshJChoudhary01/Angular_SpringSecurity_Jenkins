@@ -104,3 +104,31 @@ export class ParentComponent {
     this.data = data;
   }
 } -->
+
+
+
+
+
+<!-- module.exports = function(config) {
+  config.set({
+    frameworks: ['jasmine'],
+    browsers: ['Chrome'], // You can use other browsers as needed
+    files: [
+      // Add your test files here
+      
+      'src/app/components/calculator/buttons/buttons.component.spec.ts',
+      'src/app/app.component.spec.ts'
+    ],
+    preprocessors: {
+      'src/**/*.spec.ts': ['webpack', 'sourcemap'],
+    },
+    reporters: ['progress'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: false,
+    singleRun: true, // Set to true for CI environments
+    // concurrency: Infinity,
+  });
+  console.log("Config File used")
+}; -->

@@ -34,13 +34,16 @@ pipeline {
             }
         }
 
-        // stage('Test Frontend') {
-        //     steps {
-        //         dir('AngularFrontendService') {
-        //             bat 'ng test --watch=false'
-        //         }
-        //     }
-        // }
+        stage('Test Frontend') {
+            steps {
+                dir('AngularFrontendService') {
+                    // bat 'ng test --watch=false'
+                    bat 'npm install -g karma-cli'
+                    bat 'npm install karma karma-jasmine'
+                    bat 'karma start'
+                }
+            }
+        }
 
         stage('Deploy') {
             steps {
