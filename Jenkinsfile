@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Build Backend') {
+        stage('Build Backend and Test') {
             steps {
                 dir('JavaBackendServiceWithSpringSecurity') {
                     bat 'mvn clean install'
@@ -37,27 +37,31 @@ pipeline {
         stage('Test Frontend') {
             steps {
                 dir('AngularFrontendService') {
+                    bat 'npm run test --watch=false'
                     // bat 'ng test --watch=false'
-                    bat 'npm install -g karma-cli'
-                    bat 'npm install karma karma-jasmine'
-                    bat 'karma start'
+                    // bat 'npm install -g karma-cli'
+                    // bat 'npm install karma karma-jasmine'
+                    // bat 'karma start'
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy Backend') {
             steps {
                 dir('JavaBackendServiceWithSpringSecurity/target') {
                     bat 'xcopy *.war "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\" /Y'
                 }
 
-                // dir('AngularFrontendService/dist') {
-                //     // Deploy the frontend (static files) to a web server or CDN
-                //     // For example, you can use 'xcopy' or other Windows commands to copy files
-                //     // sh 'xcopy . user@server:/path/to/destination/' // Update server and paths
-                // }
             }
         }
+
+        //   stage('Deploy Frontend') {
+        //         steps {
+        //             dir('AngularFrontendService/dist') {
+        //                 bat 'scp -r * myuser@your-web-server-ip:/var/www/html'
+        //             }
+        //         }
+        //     }
     }
 
     post {
