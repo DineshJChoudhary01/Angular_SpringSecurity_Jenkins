@@ -66,8 +66,8 @@ pipeline {
 
         stage('Deploy Frontend') {
             steps {
-                 dir('AngularFrontendService/dist') {
-                     bat 'xcopy * "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\" /Y' 
+                 dir('AngularFrontendService/dist/calculator-using-ang') {
+                     bat 'xcopy * "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\angular" /Y' 
         }
     }
 }
