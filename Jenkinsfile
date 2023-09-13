@@ -38,10 +38,10 @@ pipeline {
             steps {
                 dir('AngularFrontendService') {
                     // bat 'npm run test --watch=false'
-                    bat 'ng test --watch=false'
-                    // bat 'npm install -g karma-cli'
-                    // bat 'npm install karma karma-jasmine'
-                    // bat 'karma start'
+                    // bat 'ng test --watch=false'
+                    bat 'npm install -g karma-cli'
+                    bat 'npm install karma karma-jasmine'
+                    bat 'karma start'
                 }
             }
         }
