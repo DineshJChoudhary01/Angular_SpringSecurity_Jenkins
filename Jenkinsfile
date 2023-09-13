@@ -64,13 +64,21 @@ pipeline {
         //         }
         //     }
 
+    //     stage('Deploy Frontend') {
+    //         steps {
+    //              dir('AngularFrontendService/dist/calculator-using-ang') {
+    //                  bat 'xcopy * "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\angular" /Y' 
+    //           }
+    //     }
+    // }
+
         stage('Deploy Frontend') {
-            steps {
-                 dir('AngularFrontendService/dist/calculator-using-ang') {
-                     bat 'xcopy * "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\angular" /Y' 
-        }
-    }
-}
+                steps {
+                    dir('AngularFrontendService') {
+                        bat 'npm start'
+                    }
+                }
+            }
 
     }
 
