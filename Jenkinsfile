@@ -43,7 +43,63 @@ pipeline {
             }
         }
 
-        // stage('Start Tomcat') {
+       
+
+
+
+        stage('Deploy Frontend') {
+                steps {
+                    dir('AngularFrontendService') {
+                        // bat 'npm start'                   
+                        // def deploymentSuccessful = bat script: 'npm start', returnStatus: true
+                
+                       script {
+                        
+                        def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
+
+                        if (frontendProcess == 0) {
+                            echo 'Frontend server started successfully!'
+                        } else {
+                            error 'Failed to start frontend server!'
+                        }
+                    }
+                    
+                    }
+                }
+
+              
+            }
+
+    }
+
+     post {
+        success {
+                echo 'Build and deployment successful!'
+                emailext subject: 'Jenkins Build Success',
+                        body: 'The Jenkins build and deployment were successful.',
+                        to: 'dinesh.choudhary@unoveo.com'
+            }
+            
+            failure {
+                echo 'Build or deployment failed!'
+                emailext subject: 'Jenkins Build Failure',
+                        body: 'The Jenkins build or deployment failed.',
+                        to: 'dinesh.choudhary@unoveo.com'
+            }
+        }
+}
+
+
+
+
+
+
+
+
+
+
+
+ // stage('Start Tomcat') {
         //      steps {
         //          bat '''
         //                 set TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1
@@ -83,95 +139,6 @@ pipeline {
             //         '''
             //     }
             // }
-
-
-
-        stage('Deploy Frontend') {
-                steps {
-                    dir('AngularFrontendService') {
-                        // bat 'npm start'                   
-                        // def deploymentSuccessful = bat script: 'npm start', returnStatus: true
-                
-                       script {
-                        
-                        def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
-
-                        if (frontendProcess == 0) {
-                            echo 'Frontend server started successfully!'
-                        } else {
-                            error 'Failed to start frontend server!'
-                        }
-                    }
-                    
-                    }
-                }
-
-              
-            }
-
-    }
-
-     post {
-        success {
-                echo 'Build and deployment successful!'
-                emailext subject: 'Jenkins Build Success',
-                        body: 'The Jenkins build and deployment were successful.',
-                        to: 'dineshjchoudhary11@gmail.com'
-            }
-            
-            failure {
-                echo 'Build or deployment failed!'
-                emailext subject: 'Jenkins Build Failure',
-                        body: 'The Jenkins build or deployment failed.',
-                        to: 'dineshjchoudhary11@gmail.com'
-            }
-        }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
