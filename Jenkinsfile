@@ -48,6 +48,7 @@ pipeline {
                  bat '''
                         set TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1
                         set START_SCRIPT=%TOMCAT_HOME%\\bin\\startup.bat
+                        set CATALINA_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1
 
                         if exist "%START_SCRIPT%" (
                             call "%START_SCRIPT%"
