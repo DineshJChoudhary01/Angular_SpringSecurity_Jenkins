@@ -62,6 +62,8 @@ pipeline {
         //         }
         //     }
 
+        // timeout /t 60 /nobreak
+
             stage('Start Tomcat') {
                 steps {
                     bat '''
@@ -72,7 +74,9 @@ pipeline {
                         echo Starting Tomcat...
                         call "%START_SCRIPT%"
                         
-                        timeout /t 60 /nobreak
+                        
+                        PING 1.1.1.1 -n 1 -w 30000 >NUL
+                        
                         
                         if %ERRORLEVEL% NEQ 0 (
                             echo Tomcat startup failed with error code %ERRORLEVEL%
