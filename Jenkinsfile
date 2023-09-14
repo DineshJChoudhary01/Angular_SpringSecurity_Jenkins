@@ -43,21 +43,21 @@ pipeline {
             }
         }
 
-        // stage('Start Tomcat') {
-        //      steps {
-        //          bat '''
-        //                 set TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1
-        //                 set START_SCRIPT=%TOMCAT_HOME%\\bin\\startup.bat
+        stage('Start Tomcat') {
+             steps {
+                 bat '''
+                        set TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1
+                        set START_SCRIPT=%TOMCAT_HOME%\\bin\\startup.bat
 
-        //                 if exist "%START_SCRIPT%" (
-        //                     call "%START_SCRIPT%"
-        //                 ) else (
-        //                     echo Tomcat startup script not found at "%START_SCRIPT%"
-        //                     exit /b 1
-        //                 )
-        //             '''
-        //         }
-        //     }
+                        if exist "%START_SCRIPT%" (
+                            call "%START_SCRIPT%"
+                        ) else (
+                            echo Tomcat startup script not found at "%START_SCRIPT%"
+                            exit /b 1
+                        )
+                    '''
+                }
+            }
 
         stage('Deploy Frontend') {
                 steps {
