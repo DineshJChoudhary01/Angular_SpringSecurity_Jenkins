@@ -53,6 +53,7 @@ pipeline {
                         if exist "%START_SCRIPT%" (
                             echo Starting Tomcat...
                             call "%START_SCRIPT%"
+                            waitfor SomethingThatIsNeverHappening /t 100 2>NUL
                             echo Tomcat started
                         ) else (
                             echo Tomcat startup script not found at "%START_SCRIPT%"
