@@ -94,18 +94,16 @@ pipeline {
      post {
         success {
                 echo 'Build and deployment successful!'
-                emailext to: 'dineshjchoudhary01@gmail.com' 
-                        subject: 'Jenkins Build Success',
+                emailext subject: 'Jenkins Build Success',
                         body: 'The Jenkins build and deployment were successful.',
-                        
+                        to: 'dineshjchoudhary01@gmail.com'
             }
             
             failure {
                 echo 'Build or deployment failed!'
-                emailext to: 'dineshjchoudhary01@gmail.com'
-                        subject: 'Jenkins Build Failure',
+                emailext subject: 'Jenkins Build Failure',
                         body: 'The Jenkins build or deployment failed.',
-                        
+                        to: 'dineshjchoudhary01@gmail.com'
             }
         }
 }
