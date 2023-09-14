@@ -43,10 +43,6 @@ pipeline {
             }
         }
 
-       
-
-
-
         stage('Deploy Frontend') {
                 steps {
                     dir('AngularFrontendService') {
@@ -75,18 +71,20 @@ pipeline {
      post {
         success {
                 echo 'Build and deployment successful!'
-                emailext subject: 'Jenkins Build Success',
+                emailext from: 'dineshjchoudhary01@gmail.com',
+                        subject: 'Jenkins Build Success',
                         body: 'The Jenkins build and deployment were successful.',
                         to: 'dinesh.choudhary@unoveo.com'
-                        from: 'dineshjchoudhary01@gmail.com'
+                        
             }
             
             failure {
                 echo 'Build or deployment failed!'
-                emailext subject: 'Jenkins Build Failure',
+                emailext from: 'dineshjchoudhary01@gmail.com',
+                        subject: 'Jenkins Build Failure',
                         body: 'The Jenkins build or deployment failed.',
                         to: 'dinesh.choudhary@unoveo.com'
-                        from: 'dineshjchoudhary01@gmail.com'
+                        
             }
         }
 }
