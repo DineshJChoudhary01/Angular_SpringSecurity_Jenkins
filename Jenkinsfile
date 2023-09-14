@@ -46,19 +46,19 @@ pipeline {
         stage('Deploy Frontend') {
                 steps {
                     dir('AngularFrontendService') {
-                        // bat 'npm start'                   
+                        bat 'npm start'                   
                         // def deploymentSuccessful = bat script: 'npm start', returnStatus: true
                 
-                       script {
+                    //    script {
                         
-                        def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
+                    //     def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
 
-                        if (frontendProcess == 0) {
-                            echo 'Frontend server started successfully!'
-                        } else {
-                            error 'Failed to start frontend server!'
-                        }
-                    }
+                    //     if (frontendProcess == 0) {
+                    //         echo 'Frontend server started successfully!'
+                    //     } else {
+                    //         error 'Failed to start frontend server!'
+                    //     }
+                    // }
                     
                     }
                 }
