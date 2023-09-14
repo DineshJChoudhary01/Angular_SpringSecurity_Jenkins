@@ -51,8 +51,9 @@ pipeline {
         //                 set CATALINA_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1
 
         //                 if exist "%START_SCRIPT%" (
-        //                     echo
+        //                     echo Starting Tomcat...
         //                     call "%START_SCRIPT%"
+        //                     timeout /t 60 /nobreak
         //                 ) else (
         //                     echo Tomcat startup script not found at "%START_SCRIPT%"
         //                     exit /b 1
@@ -61,26 +62,28 @@ pipeline {
         //         }
         //     }
 
-        stage('Start Tomcat') {
-    steps {
-        bat '''
-            set "TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1"
-            set "START_SCRIPT=%TOMCAT_HOME%\\bin\\startup.bat"
-            set "CATALINA_HOME=%TOMCAT_HOME%"
+            stage('Start Tomcat') {
+                steps {
+                    bat '''
+                        set "TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1"
+                        set "START_SCRIPT=%TOMCAT_HOME%\\bin\\startup.bat"
+                        set "CATALINA_HOME=%TOMCAT_HOME%"
 
-            if exist "%START_SCRIPT%" (
-                call "%START_SCRIPT%"
-                if %ERRORLEVEL% NEQ 0 (
-                    echo Tomcat startup failed with error code %ERRORLEVEL%
-                    exit /b %ERRORLEVEL%
-                )
-            ) else (
-                echo Tomcat startup script not found at "%START_SCRIPT%"
-                exit /b 1
-            )
-        '''
-    }
-}
+                        echo Starting Tomcat...
+                        call "%START_SCRIPT%"
+                        
+                        timeout /t 60 /nobreak
+                        
+                        if %ERRORLEVEL% NEQ 0 (
+                            echo Tomcat startup failed with error code %ERRORLEVEL%
+                            exit /b %ERRORLEVEL%
+                        )
+                        
+                        echo Tomcat started successfully.
+                    '''
+                }
+            }
+
 
 
         stage('Deploy Frontend') {
