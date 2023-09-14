@@ -52,7 +52,7 @@ pipeline {
 
                         if exist "%START_SCRIPT%" (
                             echo Starting Tomcat...
-                            bat "%START_SCRIPT%"
+                            call "%START_SCRIPT%"
                             echo Tomcat started
                         ) else (
                             echo Tomcat startup script not found at "%START_SCRIPT%"
