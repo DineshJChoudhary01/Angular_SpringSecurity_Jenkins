@@ -53,7 +53,7 @@ pipeline {
                         if exist "%START_SCRIPT%" (
                             echo Starting Tomcat...
                             start "Tomcat" "%START_SCRIPT%"
-                            timeout /t 60 /nobreak
+                            ping 127.0.0.1 -n1 -w 10000 >NUL
                             echo Tomcat started
                         ) else (
                             echo Tomcat startup script not found at "%START_SCRIPT%"
