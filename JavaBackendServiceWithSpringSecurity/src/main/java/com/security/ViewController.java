@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 
 	@GetMapping("/login")
+//@RequestMapping("/BackendForcalculator/login")
 	public String login() {
 
 		System.out.println("authenticated successfully");
