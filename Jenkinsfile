@@ -63,6 +63,7 @@ pipeline {
         //     }
 
         // timeout /t 60 /nobreak
+        // call "%START_SCRIPT%"
 
             stage('Start Tomcat') {
                 steps {
@@ -72,7 +73,8 @@ pipeline {
                         set "CATALINA_HOME=%TOMCAT_HOME%"
 
                         echo Starting Tomcat...
-                        call "%START_SCRIPT%"
+                        start "Tomcat" "%START_SCRIPT%"
+                        
                         
                         
                         PING 1.1.1.1 -n 1 -w 30000 >NUL
