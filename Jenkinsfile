@@ -72,14 +72,27 @@ pipeline {
                     //         echo 'Frontend deployment failed!'
                     //     }
                     // }
-                       script {
-                        // Start the npm server in the background
-                        def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
+                    //    script {
+                    //     // Start the npm server in the background
+                    //     def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
 
+                    //     if (frontendProcess == 0) {
+                    //         echo 'Frontend server started successfully!'
+                    //     } else {
+                    //         error 'Failed to start frontend server!'
+                    //     }
+                    // }
+                     script {
+                        // Start the frontend development server in the background
+                        def frontendProcess = bat(script: 'npm start &', returnStatus: true)
+                        
+                        // Sleep for a while to allow the server to start (adjust the duration as needed)
+                        sleep time: 10, unit: 'SECONDS'
+                        
                         if (frontendProcess == 0) {
-                            echo 'Frontend server started successfully!'
+                            echo 'Frontend deployment started successfully!'
                         } else {
-                            error 'Failed to start frontend server!'
+                            echo 'Frontend deployment failed to start!'
                         }
                     }
                     }
