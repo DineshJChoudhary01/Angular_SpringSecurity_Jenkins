@@ -9,18 +9,10 @@ pipeline {
             }
         }
 
-        stage('Build Backend and Test') {
+        stage('Build Backend and Perform Test') {
             steps {
                 dir('JavaBackendServiceWithSpringSecurity') {
                     bat 'mvn clean install'
-                }
-            }
-        }
-
-         stage('Test Backend') {
-            steps {
-                dir('JavaBackendServiceWithSpringSecurity') {
-                    bat 'mvn test'
                 }
             }
         }
@@ -37,11 +29,6 @@ pipeline {
         stage('Test Frontend') {
             steps {
                 dir('AngularFrontendService') {
-                    // bat 'npm run test --watch=false'
-                    // bat 'ng test --watch=false'
-                    // bat 'npm install -g karma-cli'
-                    // bat 'npm install karma karma-jasmine'
-                    // bat 'npm run karma start'
                     bat 'npm run test:ci'
                 }
             }
@@ -56,39 +43,41 @@ pipeline {
             }
         }
 
-        //   stage('Deploy Frontend') {
-        //         steps {
-        //             dir('AngularFrontendService/dist') {
-        //                 bat 'scp -r * myuser@your-web-server-ip:/var/www/html'
-        //             }
-        //         }
-        //     }
-
-    //     stage('Deploy Frontend') {
-    //         steps {
-    //              dir('AngularFrontendService/dist/calculator-using-ang') {
-    //                  bat 'xcopy * "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\angular" /Y' 
-    //           }
-    //     }
-    // }
+      
 
         stage('Deploy Frontend') {
                 steps {
                     dir('AngularFrontendService') {
-                        bat 'npm start'
+                        // bat 'npm start'
+                         script {
+                        // Add your deployment steps here
+                        def deploymentSuccessful = bat script: 'npm start', returnStatus: true
+                        if (deploymentSuccessful == 0) {
+                            echo 'Frontend deployment successful!'
+                        } else {
+                            echo 'Frontend deployment failed!'
+                        }
+                    }
                     }
                 }
             }
 
     }
 
-    post {
+     post {
         success {
-            echo 'Build and deployment successful!'
+                echo 'Build and deployment successful!'
+                emailext subject: 'Jenkins Build Success',
+                        body: 'The Jenkins build and deployment were successful.',
+                        to: 'dineshjchoudhary01@gmail.com'
+            }
+            
+            failure {
+                echo 'Build or deployment failed!'
+                emailext subject: 'Jenkins Build Failure',
+                        body: 'The Jenkins build or deployment failed.',
+                        to: 'dineshjchoudhary01@gmail.com'
+            }
         }
-        failure {
-            echo 'Build or deployment failed!'
-        }
-    }
 }
 
