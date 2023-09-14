@@ -60,22 +60,19 @@ pipeline {
         //     }
 
         stage('Deploy Frontend') {
-                // steps {
-                //     dir('AngularFrontendService') {
-                //         // bat 'npm start'
-                //          script {
+                steps {
+                    dir('AngularFrontendService') {
+                        // bat 'npm start'
+                    //      script {
                         
-                //         def deploymentSuccessful = bat script: 'npm start', returnStatus: true
-                //         if (deploymentSuccessful == 0) {
-                //             echo 'Frontend deployment successful!'
-                //         } else {
-                //             echo 'Frontend deployment failed!'
-                //         }
-                //     }
-                //     }
-                // }
-
-                 script {
+                    //     def deploymentSuccessful = bat script: 'npm start', returnStatus: true
+                    //     if (deploymentSuccessful == 0) {
+                    //         echo 'Frontend deployment successful!'
+                    //     } else {
+                    //         echo 'Frontend deployment failed!'
+                    //     }
+                    // }
+                       script {
                         // Start the npm server in the background
                         def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
 
@@ -85,6 +82,10 @@ pipeline {
                             error 'Failed to start frontend server!'
                         }
                     }
+                    }
+                }
+
+              
             }
 
     }
