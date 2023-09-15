@@ -9,12 +9,11 @@ pipeline {
             }
         }
 
-        stage('Build Backend and Perform Test') {
+        stage('Build Backend, Perform Test and Send Mail') {
             steps {
                 dir('JavaBackendServiceWithSpringSecurity') {
                     bat 'mvn clean install'
                 }
-
                   emailext subject: 'Backend Deployment Successful',
                         body: 'The backend was successfully deployed.',
                         to: 'dinesh.choudhary@unoveo.com'
@@ -30,13 +29,13 @@ pipeline {
             }
         }
 
-        stage('Test Frontend') {
-            steps {
-                dir('AngularFrontendService') {
-                    bat 'npm run test:ci'
-                }
+     stage('Test Frontend') {
+         steps {
+             dir('AngularFrontendService') {
+                 bat 'npm run test:ci'
             }
         }
+    }
 
         stage('Deploy Backend') {
             steps {
@@ -70,7 +69,7 @@ pipeline {
                 
             }
 
-        stage('Deploy Frontend') {
+        stage('Deploy Frontend and Send Mail') {
                 steps {
                     dir('AngularFrontendService') {
                         // bat 'npm start'                   
@@ -95,15 +94,17 @@ pipeline {
               
             }
 
-             stage('Demo Approval') {
-            input {
-                message 'Pause for Demo: Click "Proceed" to continue.'
-                ok 'Proceed'
+            
+
+                stage('Demo Approval') {
+                input {
+                    message 'Pause for Demo: Click "Proceed" to continue.'
+                    ok 'Proceed'
+                }
+                steps {
+                    echo 'Demo Approved. Resuming the pipeline.'
+                }
             }
-            steps {
-                echo 'Demo Approved. Resuming the pipeline.'
-            }
-        }
 
     }
 
