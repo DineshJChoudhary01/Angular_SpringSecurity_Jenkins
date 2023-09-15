@@ -14,6 +14,10 @@ pipeline {
                 dir('JavaBackendServiceWithSpringSecurity') {
                     bat 'mvn clean install'
                 }
+
+                  emailext subject: 'Backend Deployment Successful',
+                        body: 'The backend was successfully deployed.',
+                        to: 'dineshjchoudhary11@gmail.com'
             }
         }
 
@@ -60,9 +64,7 @@ pipeline {
                             exit /b 1
                         )
                     '''
-                    emailext subject: 'Backend Deployment Successful and Tomcat Server Started',
-                        body: 'The backend was successfully deployed and tomcat server started.',
-                        to: 'dineshjchoudhary11@gmail.com'
+                    
                 }
 
                 
@@ -86,11 +88,10 @@ pipeline {
                     }
                     
                     }
-                }
-
-                emailext subject: 'Frontend Deployment Successful and Server Started',
+                    emailext subject: 'Frontend Deployment Successful and Server Started',
                         body: 'The frontkend was successfully deployed and server started.',
                         to: 'dineshjchoudhary11@gmail.com'
+                }
               
             }
 
