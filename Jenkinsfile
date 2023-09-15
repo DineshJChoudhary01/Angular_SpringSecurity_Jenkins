@@ -17,7 +17,7 @@ pipeline {
 
                   emailext subject: 'Backend Deployment Successful',
                         body: 'The backend was successfully deployed.',
-                        to: 'dineshjchoudhary11@gmail.com'
+                        to: 'dinesh.choudhary@unoveo.com'
             }
         }
 
@@ -90,10 +90,20 @@ pipeline {
                     }
                     emailext subject: 'Frontend Deployment Successful and Server Started',
                         body: 'The frontkend was successfully deployed and server started.',
-                        to: 'dineshjchoudhary11@gmail.com'
+                        to: 'dinesh.choudhary@unoveo.com'
                 }
               
             }
+
+             stage('Demo Approval') {
+            input {
+                message 'Pause for Demo: Click "Proceed" to continue.'
+                ok 'Proceed'
+            }
+            steps {
+                echo 'Demo Approved. Resuming the pipeline.'
+            }
+        }
 
     }
 
@@ -118,61 +128,3 @@ pipeline {
 
 
 
-
-
-
-
-
-
-
-
- 
-
-            // stage('Start Tomcat') {
-            //     steps {
-            //         bat '''
-            //             set "TOMCAT_HOME=C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1"
-            //             set "START_SCRIPT=%TOMCAT_HOME%\\bin\\startup.bat"
-            //             set "CATALINA_HOME=%TOMCAT_HOME%"
-
-            //             echo Starting Tomcat...
-            //             start "Tomcat" "%START_SCRIPT%"
-                        
-                        
-            //             if %ERRORLEVEL% NEQ 0 (
-            //                 echo Tomcat startup failed with error code %ERRORLEVEL%
-            //                 exit /b %ERRORLEVEL%
-            //             )
-                        
-            //             echo Tomcat started successfully.
-            //         '''
-            //     }
-            // }
-
-
-
-                // script {
-                //         // Start the frontend development server in the background
-                //         def frontendProcess = bat(script: 'npm start &', returnStatus: true)
-                        
-                //         // Sleep for a while to allow the server to start (adjust the duration as needed)
-                //         sleep time: 30, unit: 'SECONDS'
-                        
-                //         if (frontendProcess == 0) {
-                //             echo 'Frontend deployment started successfully!'
-                //         } else {
-                //             echo 'Frontend deployment failed to start!'
-                //         }
-                //     }
-
-
-                //  script {
-                //         // Start the npm server in the background
-                //         def frontendProcess = bat(script: 'start /B npm start', returnStatus: true)
-
-                //         if (frontendProcess == 0) {
-                //             echo 'Frontend server started successfully!'
-                //         } else {
-                //             error 'Failed to start frontend server!'
-                //         }
-                //     }
