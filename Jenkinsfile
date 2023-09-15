@@ -60,11 +60,12 @@ pipeline {
                             exit /b 1
                         )
                     '''
-                }
-
-                emailext subject: 'Backend Deployment Successful and Tomcat Server Started',
+                    emailext subject: 'Backend Deployment Successful and Tomcat Server Started',
                         body: 'The backend was successfully deployed and tomcat server started.',
                         to: 'dineshjchoudhary11@gmail.com'
+                }
+
+                
             }
 
         stage('Deploy Frontend') {
