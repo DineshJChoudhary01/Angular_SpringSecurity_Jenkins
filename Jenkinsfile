@@ -61,6 +61,10 @@ pipeline {
                         )
                     '''
                 }
+
+                emailext subject: 'Backend Deployment Successful and Tomcat Server Started',
+                        body: 'The backend was successfully deployed and tomcat server started.',
+                        to: 'dineshjchoudhary11@gmail.com'
             }
 
         stage('Deploy Frontend') {
@@ -83,6 +87,9 @@ pipeline {
                     }
                 }
 
+                emailext subject: 'Frontend Deployment Successful and Server Started',
+                        body: 'The frontkend was successfully deployed and server started.',
+                        to: 'dineshjchoudhary11@gmail.com'
               
             }
 
@@ -91,8 +98,7 @@ pipeline {
      post {
         success {
                 echo 'Build and deployment successful!'
-                emailext from: 'dineshjchoudhary01@gmail.com',
-                        subject: 'Jenkins Build Success',
+                emailext subject: 'Jenkins Build Success',
                         body: 'The Jenkins build and deployment were successful.',
                         to: 'dinesh.choudhary@unoveo.com'
                         
@@ -100,8 +106,7 @@ pipeline {
             
             failure {
                 echo 'Build or deployment failed!'
-                emailext from: 'dineshjchoudhary01@gmail.com',
-                        subject: 'Jenkins Build Failure',
+                emailext subject: 'Jenkins Build Failure',
                         body: 'The Jenkins build or deployment failed.',
                         to: 'dinesh.choudhary@unoveo.com'
                         
