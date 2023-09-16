@@ -76,14 +76,12 @@ pipeline {
                             echo Tomcat startup script not found at "%START_SCRIPT%"
                             exit /b 1
                         )
-                    '''
-                    
+                    '''                    
                 }
 
-                
             }
 
-        stage('Deploy Frontend and Send Mail') {
+        stage('Deploy Frontend') {
                 steps {
                     dir('AngularFrontendService') {
                         // bat 'npm start'                   
@@ -122,7 +120,8 @@ pipeline {
 
      post {
         success {
-                echo 'Build and deployment successful!'
+
+                echo 'Build and deployment successful.'
                 emailext subject: 'Jenkins Build Success',
                         body: 'The Jenkins build and deployment were successful.',
                         to: 'dinesh.choudhary@unoveo.com'
@@ -130,7 +129,7 @@ pipeline {
             }
             
             failure {
-                echo 'Build or deployment failed!'
+                echo 'Build or deployment failed'
                 emailext subject: 'Jenkins Build Failure',
                         body: 'The Jenkins build or deployment failed.',
                         to: 'dinesh.choudhary@unoveo.com'
